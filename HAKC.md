@@ -10,11 +10,11 @@
     make
     make install 
     ```
-2. Once built, enter the /build directory and copy the QEMU builds to /usr/local/bin. [might not be necessary, `make install` should suffice]
+2. If qemu is not running the latest version we've just built, enter the /build directory and copy the QEMU builds to /usr/local/bin. 
     - `cd build`
     - `sudo cp aarch64-softmmu/qemu-system-aarch64 /usr/local/bin/qemu-system-aarch64`
     - `qemu-system-aarch64 --version`
-    - If it's not showing the latest version, either remove the `qemu-system-aarch64` in /usr/bin/ or replace the second command with `sudo cp aarch64-softmmu/qemu-system-aarch64 /usr/local/bin/qemu[VER]-system-aarch64`.
+    - If it's not showing the latest version still, either remove the `qemu-system-aarch64` in /usr/bin/ or replace the second command with `sudo cp aarch64-softmmu/qemu-system-aarch64 /usr/local/bin/qemu[VER]-system-aarch64`.
 
 # Building the kernel
 Follow the instructions in https://github.com/mit-ll/HAKC/tree/main/PMC-Pass
