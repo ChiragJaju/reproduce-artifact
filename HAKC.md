@@ -25,14 +25,18 @@ Follow the instructions in https://github.com/mit-ll/HAKC/tree/main/PMC-Pass
 - `dd if=/dev/null of=disk.img bs=1M seek=10240`
 - `xzcat 20230102_raspi_4_bullseye.img.xz | dd of=disk.img conv=notrunc status=progress`
 - `sudo partx -a -v disk.img `  
-    -  This will show that it is using a loop device, such as /dev/loop1. That's the device we will continue to use, so replace accordingly.
+    -  This will show that it is using a loop device, such as /dev/loop21. That's the device we will continue to use, so replace accordingly.
 - `mkdir host-mount` 
-- `sudo mount /dev/loop1p1 host-mount`
+- `sudo mount /dev/loop21p1 host-mount`
 - `cp host-mount/initrd.img* .`
 - `cp host-mount/vmlinuz-5.10* .`
 - `qemu-system-aarch64 -M virt,mte=on -m 4096 -cpu max -drive format=raw,file=disk.img -nographic -append "root=/dev/vda2 net.ifaces=0 rootwait" -initrd initrd.img-5.10.0-20-arm64 -kernel vmlinuz-5.10.0-20-arm64` 
     - The initial run of QEMU resizes the root filesystem partition to use the full remaining space in the disk image, and is necessary to install new modules. The username is `root` with no password.
     - `apt update && apt install apache2`
 - `poweroff`
+- `sudo umount host-mount`
+- `sudo mount /dev/loop21p2 host-mount`
+    - If mount is getting these errors "mount: wrong fs type, bad option, bad superblock on /dev/loop21p2, missing codepage or helper program, or other error" and in `dmesg`, "EXT4-fs (loop21p2): bad geometry: block count 2490368 exceeds size of device (508928 blocks)", reformat the partition.
 - 
+
  
