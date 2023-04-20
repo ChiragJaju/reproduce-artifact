@@ -42,7 +42,13 @@ Follow the instructions in https://github.com/mit-ll/HAKC/tree/main/PMC-Pass
 14. `pushd /home/soo/RPE/HAKC/MTE-kernel/pmc-build; sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 CC=clang HOSTCC=clang INSTALL_MOD_PATH=/home/soo/RPE/HAKC/linux-envs/host-mount modules_install` 
     - Take note of the build number at the end: `5.10.24pmc-build`
 15. `popd`
-16. 
-
-
- 
+16. `sudo umount host-mount`
+17. `sudo mount /dev/loop21p1 host-mount`
+18. `qemu-system-aarch64 -M virt,mte=on -m 4096 -cpu max -drive format=raw,file=disk.img -nographic -append "root=/dev/vda2 net.ifaces=0 rootwait" -initrd initrd.img-5.10.0-20-arm64 -kernel vmlinuz-5.10.0-20-arm64` 
+    - If there is a filesystem error "RASPIROOT: UNEXPECTED INCONSISTENCY", do `fsck -y /dev/vda2` and `exit` initramfs upon completion to resume QEMU operation.
+    - `mkinitramfs -v -o /boot/firmware/initrd.pmc-build.img 5.10.24pmc-build`
+    - `poweroff`
+19. `sudo umount host-mount`
+20. `sudo mount /dev/loop21p1 host-mount`
+21. `cp host-mount/initrd.pmc-build.img .`
+22. `qemu-system-aarch64 -M virt,mte=on -m 4096 -cpu max -drive format=raw,file=disk.img -nographic -device virtio-net-pci,netdev=net0 -netdev user,id=net0,hostfwd=tcp::8032-:80 -append "$(cat host-mount/cmdline.txt)" -initrd initrd.pmc-build.img -kernel /home/soo/RPE/HAKC/MTE-kernel/pmc-build/arch/arm64/boot/Image.gz`
