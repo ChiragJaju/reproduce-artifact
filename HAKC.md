@@ -39,8 +39,10 @@ Follow the instructions in https://github.com/mit-ll/HAKC/tree/main/PMC-Pass
 12. `sudo umount host-mount`
 13. `sudo mount /dev/loop21p2 host-mount`
     - If mount is getting these errors "mount: wrong fs type, bad option, bad superblock on /dev/loop21p2, missing codepage or helper program, or other error", and in `dmesg`, "EXT4-fs (loop21p2): bad geometry: block count 2490368 exceeds size of device (508928 blocks)", it is because the root partition is expanded beyond its allocated size. Remove the disk image, begin again from step 3 and remember to do step 10.
-14. `pushd /home/soo/RPE/HAKC/MTE-kernel/pmc-build; sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 CC=clang HOSTCC=clang INSTALL_MOD_PATH=/home/soo/RPE/HAKC/host-mount modules_install` 
+14. `pushd /home/soo/RPE/HAKC/MTE-kernel/pmc-build; sudo make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 CC=clang HOSTCC=clang INSTALL_MOD_PATH=/home/soo/RPE/HAKC/linux-envs/host-mount modules_install` 
     - Take note of the build number at the end: `5.10.24pmc-build`
+15. `popd`
+16. 
 
 
  
