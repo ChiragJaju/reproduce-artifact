@@ -31,7 +31,7 @@ Follow the instructions in https://github.com/mit-ll/HAKC/tree/main/PMC-Pass
 8. `cp host-mount/initrd.img* .`
 9. `cp host-mount/vmlinuz-5.10* .`
 10. Resize partition 2 to use all the remaining space in the disk image. This is important to prevent mounting error in partition 2 later on.
-11. `qemu-system-aarch64 -M virt,mte=on -m 4096 -cpu max -drive format=raw,file=disk.img -nographic -append "root=/dev/vda2 net.ifaces=0 rootwait" -initrd initrd.img-5.10.0-20-arm64 -kernel vmlinuz-5.10.0-20-arm64` 
+11. `qemu-system-aarch64 -M virt,mte=on -m 4096 -cpu max -drive format=raw,file=disk.img -nographic -append "root=/dev/vda2 net.ifaces=0 rootwait" -initrd initrd.img-5.10.0-20-arm64 -kernel vmlinuz-5.10.0-20-arm64` or ` qemu-system-aarch64 -M virt,mte=on -m 4096 -cpu max -drive format=raw,file=disk.img -nographic -append "root=/dev/vda2 net.ifaces=0 rootwait" -initrd initrd.img-6.0.0-6-arm64 -kernel vmlinuz-6.0.0-6-arm64 `
     - The initial run of QEMU resizes the root filesystem partition to use the full remaining space in the disk image, and is necessary to install new modules. The username is `root` with no password.
     - If there is an error on raising the network interface (e.g., `systemctl status networking.service` tells me `ifup: failed to bring up eth0`), go to /etc/network/interfaces.d and replace `eth0` with whatever you see when you do `ip a` (e.g., enp0s1). Once done, `poweroff` and start QEMU again (`reboot` doesn't seem to work).
     - `apt update && apt install apache2`
