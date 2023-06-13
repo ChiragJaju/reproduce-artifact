@@ -27,7 +27,7 @@ Follow the instructions in https://github.com/mit-ll/HAKC/tree/main/PMC-Pass
 5. `sudo partx -a -v disk.img `  
     -  This will show that it is using a loop device, such as /dev/loop21. That's the device we will continue to use, so replace accordingly.
 6. `mkdir host-mount` 
-7. `sudo mount /dev/loop21p1 host-mount`
+7. `sudo mount /dev/loop21p1 host-mount` or `sudo mount /dev/loop2p1 host-mount`
 8. `cp host-mount/initrd.img* .`
 9. `cp host-mount/vmlinuz-5.10* .`
 10. Resize partition 2 to use all the remaining space in the disk image. This is important to prevent mounting error in partition 2 later on.
