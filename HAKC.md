@@ -1,6 +1,6 @@
 # Preparation
 ## Build the latest QEMU (v8.0.0-rc3) for MTE support
-1. Download and build the latest QEMU: https://www.qemu.org/download/#source. During configuration, add the `--enable-slirp` flag. `slirp` has been the default networking backend for QEMU but it was removed since QEMU 7.2 release. In the end, remember to `make install` to avoid the 'failed to find romfile "efi-virtio.rom"' error. 
+1. Download and build the latest QEMU: https://www.qemu.org/download/#source. During configuration, add the `--enable-slirp` flag. `slirp` has been the default networking backend for QEMU but it was removed since QEMU 7.2 release. In the end, remember to `make install` to avoid the 'failed to find romfile "efi-virtio.rom"' error. If you encounter a pixman-1 not found error, just lookup the package name for pixman ( for fedora its pixman-devel, for ubuntu its libpixman-1-dev ) and install it (eg. `sudo dnf install pixman-devel` ).
     ```
     sudo apt install libslirp-dev
     wget https://download.qemu.org/qemu-8.0.0-rc4.tar.xz
