@@ -28,9 +28,9 @@
 
 # Emulating with QEMU
 1. `mkdir linux-envs; cd linux-envs`
-2. Download a raspberry pi image (20230102_raspi_4_bullseye.img.xz) from https://raspi.debian.net/tested-images/. Copy to the /linux-envs directory.
+2. Download a raspberry pi image (20230102_raspi_3_bullseye.img.xz) from https://raspi.debian.net/tested-images/. Copy to the /linux-envs directory.
 3. `dd if=/dev/null of=disk.img bs=1M seek=10240`
-4. `xzcat 20230102_raspi_4_bullseye.img.xz | dd of=disk.img conv=notrunc status=progress`
+4. `xzcat 20230102_raspi_3_bullseye.img.xz | dd of=disk.img conv=notrunc status=progress`
 5. `sudo partx -a -v disk.img `  
     -  This will output a partition number and we will use that. eg loop0 will have two partitions loop0p1 and loop0p2 
 6. `mkdir host-mount` 
